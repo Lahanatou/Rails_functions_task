@@ -6,15 +6,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in(@user)
-      redirect_to user_path(@user.id), notice: 'Non spécifié Compte enregistré.'
-    else
-      render :new
-    end
-  end
+  dPouvoir enregistrer une image de profil lors de l'enregistrement d'un compte
 
   def show
     @user = User.find(params[:id])
