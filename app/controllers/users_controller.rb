@@ -6,7 +6,16 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  dPouvoir enregistrer une image de profil lors de l'enregistrement d'un compte
+  ddef create
+    @user = User.new(user_params)
+    if @user.save
+      ContactMailer.with(to: @user.email, name: @user.name).welcome.deliver_later
+      log_in(@user)
+      redirect_to user_path(@user.id)
+    else
+      render :new
+    end
+end
 
   def show
     @user = User.find(params[:id])
